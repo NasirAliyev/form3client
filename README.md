@@ -50,3 +50,20 @@ should I spend additional time for that. If I should please let me know.
 Package can be extracted with minimal changes and can be used as independent package.
 I did not do that due to run it from one place.
 Every API divided into separate files in order to make it clean. E.g: `requests/createacount.go` 
+
+
+## Example
+
+```shell
+config := form3.Config{
+    BaseUrl: "https://form3-api.example.com",
+}
+
+client := form3.NewClient(config)
+
+input := inputs.FetchAccountInput{
+    AccountId: "eb0bd6f5-c3f5-44b2-b677-acd23cdde73c",
+}
+
+account, err := client.FetchAccount(&input)
+```
