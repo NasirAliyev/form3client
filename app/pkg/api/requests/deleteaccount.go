@@ -10,7 +10,7 @@ import (
 )
 
 const (
-	deleteAccountUri = "/v1/organisation/accounts/"
+	deleteAccountUri = "/v1/organisation/accounts"
 )
 
 // deleteAccountRequest the child struct of Request and represents delete account operation
@@ -30,7 +30,11 @@ func NewDeleteAccountRequest(baseUrl string) *deleteAccountRequest {
 // Execute will make the request, returning error if errors are encountered,
 // otherwise expected success response will be retrieved
 func (c deleteAccountRequest) Execute(input *inputs.DeleteAccountInput) (*outputs.DeleteAccountOutput, error) {
-	resp, err := http.Get(c.url + c.buildQueryString(input))
+	url := c.url + c.buildQueryString(input)
+	req, _ := http.NewRequest(http.MethodDelete, url, nil)
+
+	client := &http.Client{}
+	resp, err := client.Do(req)
 
 	if err != nil {
 		return nil, exceptions.RequestFailedException{}
@@ -56,5 +60,5 @@ func (c deleteAccountRequest) Execute(input *inputs.DeleteAccountInput) (*output
 
 // buildQueryString is a private method for generating proper query string from input.
 func (c deleteAccountRequest) buildQueryString(input *inputs.DeleteAccountInput) string {
-	return fmt.Sprintf("/%s?version=%d", input.AccountId, input.Version)
+	return fmt.Sprintf("/%s?version=%d", input.AccountId, *input.Version)
 }

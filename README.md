@@ -2,18 +2,18 @@
 
 ### About
 
-- **Author**: `Nasir Aliyev`
-- **Experience in web development**: `10 years (PHP, Python, JS)`
-- **Experience in GO**: `0 years`
+This is a client library in Go to access form3 fake account API, which is provided as a Docker
+container in the file `docker-compose.yaml` of this repository. Please refer to the
+[Form3 documentation](http://api-docs.form3.tech/api.html#organisation-accounts) for information on how to interact with the API. Please note that the fake account API does not require any authorisation or authentication.
+
+Main README of task. [here](Form3README.md).
 
 ### Instruction
 *In order to run tests, it is enough just to run this command :*
 ```
 docker compose up
 ```
-As it is required, tests are integration tests. I covered positive flow and some negative flows. In order to 
-cover all negative flows mocking responses is necessary. I could not understand from requirement,
-should I spend additional time for that. If I should please let me know.
+
 
 ### Structure
 

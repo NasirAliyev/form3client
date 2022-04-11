@@ -104,18 +104,20 @@ func TestClient_DeleteAccount(t *testing.T) {
 	}
 
 	client := NewClient(config)
-	_, _ = client.CreateAccount(&createInput)
-
-	version := int64(1)
+	createdAccount, _ := client.CreateAccount(&createInput)
 
 	input := inputs.DeleteAccountInput{
-		AccountId: id,
-		Version:   &version,
+		AccountId: createdAccount.Data.ID,
+		Version:   createdAccount.Data.Version,
 	}
 
 	resp, _ := client.DeleteAccount(&input)
 
-	assert.Empty(t, resp, "Account not deleted")
+	fetchInput := inputs.FetchAccountInput{AccountId: id}
+	fetchResp, _ := client.FetchAccount(&fetchInput)
+
+	assert.Empty(t, resp, "Request failed")
+	assert.Empty(t, fetchResp, "The account still exists")
 }
 
 // Testing DeleteAccount api for negative flow.
